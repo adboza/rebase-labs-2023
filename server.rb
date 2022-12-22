@@ -16,11 +16,16 @@ get '/json_test' do
   end.to_json
 end
 
-get '/test' do
+get '/tests' do
   e_text = []
+  puts '$$$$$$$$$$$$$$$$$$ inside server.rb get /tests line 21, '
   ImportFromCsv.new
+  puts "$$$$$$$$$$$$$$$$$$ inside server.rb get /tests line 23"
+
+
   conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
-  exams = conn.exec("SELECT * FROM EXAM")
+  exams = conn.exec("SELECT * FROM EXAMS")
+  puts "$$$$$$$$$$$$$$$$$$$ #{conn.exec("SELECT * FROM EXAMS")} at line server.rb 28"
   exams.each do |e|
     e_text.unshift({ cpf: e['cpf'], nome_paciente: e['nome_paciente'], email_paciente: e['email_paciente'],
       data_nascimento_paciente: e['data_nascimento_paciente'], endereço_rua_paciente: e['endereço_rua_paciente'],
