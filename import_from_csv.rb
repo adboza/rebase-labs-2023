@@ -36,8 +36,6 @@ class ImportFromCsv
   end
 
   def insert_data
-    puts '$$$$$$$$$$$$$$$$$$ inside import_from_csv.rb line 39, '
-  
     csv_iteration.each do |row|
       @connection.exec(
         "INSERT INTO EXAMS (cpf, nome_paciente, email_paciente, data_nascimento_paciente, 
@@ -49,12 +47,9 @@ class ImportFromCsv
                   '#{row['crm médico']}', '#{row['crm médico estado']}',
                   '#{row['nome médico']}', '#{row['email médico']}',
                   '#{row['token resultado exame']}', '#{row['data exame']}',
-                  '#{row['tipo exame']}', '#{row['limites tipo exame']}', #{row['resultado tipo_exame'].to_i})"
+                  '#{row['tipo exame']}', '#{row['limites tipo exame']}', #{row['resultado tipo exame'].to_i})"
       )
     end
-    puts '$$$$$$$$$$$$$$$$$$ inside import_from_csv.rb line 55, end of insert into exams'
-    puts @connection.exec("SELECT * FROM EXAMS")
-
   end
 
   def csv_iteration

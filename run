@@ -11,4 +11,3 @@ docker run \
   -p 3000:3000 \
   ruby \
   bash -c "ruby server.rb"
-  #bash -c "gem install bundler && bundle install &&gem install rack sinatra puma && ruby server.rb"
