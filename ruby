@@ -1,8 +1,11 @@
 #!/bin/bash
 
 docker run \
-  -it \
   --rm \
-  --name ruby \
+  --name rebase-labs \
+  -w /app \
+  -v $(pwd):/app \
+  --network rebase-labs \
+  -p 3000:3000 \
   ruby \
-  bash
+  bash -c "gem install bundler && bundle install && ruby import_from_csv.rb"
