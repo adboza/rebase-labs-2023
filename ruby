@@ -2,7 +2,7 @@
 
 docker run \
   --rm \
-  --name rebase-labs \
+  --name ruby \
   -w /app \
   -v $(pwd):/app \
   -v rubygems_rebase_labs:/usr/local/bundle \
