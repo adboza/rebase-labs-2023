@@ -5,7 +5,7 @@ class ImportFromCsv
   attr_reader :connection
 
   def initialize
-    @connection = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
+    @connection = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
     create_table
     insert_data
   end

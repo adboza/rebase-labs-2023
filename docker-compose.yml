@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app: 
+    image: 'ruby'
+    working_dir: /app
+    volumes: 
+      - .:/app
+      - rubygems_rebase_labs:/usr/local/bundle
+      - gemconfig:/root/.local/share/gem
+    networks:
+      - rebase-labs
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    command: bash -c "bundle && ruby server.rb"
+  postgres:
+    image: 'postgres'
+    volumes:
+      - pgdata_rebase_labs:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: medical_records
+    networks:
+    - rebase-labs
+
+  rspec:
+    image: 'rspec'
+    working_dir: /app
+    volumes: 
+      - .:/app
+      - rubygems_rebase_labs:/usr/local/bundle
+      - gemconfig:/root/.local/share/gem
+    networks:
+      - rebase-labs
+    command: bash -c "bundle exec rspec"
+
+volumes:
+  rubygems_rebase_labs:
+  gemconfig:
+  pgdata_rebase_labs:
+networks:
+  rebase-labs: {}

@@ -18,7 +18,7 @@ end
 
 get '/tests' do
   ImportFromCsv.new
-  conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
+  conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
   exams = conn.exec("SELECT * FROM EXAMS")
   exams.map { |tuple| tuple }.to_json
 end
