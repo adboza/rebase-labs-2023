@@ -4,8 +4,8 @@ docker run \
   --rm \
   --name rspec \
   -w /spec \
-  -v /home/bozacarloto/repos/campuscode/rebase/rebase-labs-2023:/app \
   -v rubygems_rebase_labs:/usr/local/bundle \
+  -v /home/bozacarloto/repos/campuscode/rebase/rebase-labs-2023:/app \
   --network rebase-labs \
   ruby \
-  bash -c "bundle exec rspec" 
+  bash -c "bundle exec rspec"

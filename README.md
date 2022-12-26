@@ -1,6 +1,13 @@
 # Rebase Labs
 
+An application to manage laboratory exams. 
+This project is in Portuguese [pt-br] and is part of Rebase Labs course, sponsored by [Rebase](https://rebase.com.br/) and [Campus Code](https://www.campuscode.com.br/).
+Current progress available at: [Trello - Rebase Labs Card](https://trello.com/c/2IUQpLu4/42-rebase-labs)
+
 Uma app web para listagem de exames médicos.
+Este projeto é parte do curso Rebase Labs, patrocinado por [Rebase](https://rebase.com.br/) e [Campus Code](https://www.campuscode.com.br/).
+Acompanhamento do progresso disponível em: [Trello - Rebase Labs Card](https://trello.com/c/2IUQpLu4/42-rebase-labs)
+
 
 ## Tech Stack
 
