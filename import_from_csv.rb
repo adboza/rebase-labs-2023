@@ -11,7 +11,7 @@ class ImportFromCsv
   end
 
   def create_table
-    @connection.exec("DROP TABLE EXAMS")
+    @connection.exec("DROP TABLE IF EXISTS EXAMS")
     @connection.exec("
         CREATE TABLE EXAMS(
           id SERIAL PRIMARY KEY,

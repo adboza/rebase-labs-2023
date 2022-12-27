@@ -27,6 +27,10 @@ get '/hello' do
   'Hello world! updated'
 end
 
+get '/' do
+  File.read('./src/index.html')
+end
+
 Rack::Handler::Puma.run(
   Sinatra::Application,
   Port: 3000,

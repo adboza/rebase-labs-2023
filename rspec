@@ -5,6 +5,7 @@ docker run \
   --name rspec \
   -w /spec \
   -v rubygems_rebase_labs:/usr/local/bundle \
+  -v rubygems_rebase_labs:/root/.local/share/gem \
   -v /home/bozacarloto/repos/campuscode/rebase/rebase-labs-2023:/app \
   --network rebase-labs \
   ruby \
