@@ -28,7 +28,9 @@ get '/hello' do
 end
 
 get '/' do
-  File.read('./src/index.html')
+  #send_file File.expand_path('./src/index.html', settings.public_folder)
+
+  File.read('./public/index.html')
 end
 
 Rack::Handler::Puma.run(
