@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+a {
+  color: rgba(228, 223, 218, 1);
+  text-decoration: none;
+}
+
+.b3content{
+  color:  rgba(228, 223, 218, 1);
+  width: 800px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   display: flex;
@@ -9,9 +24,8 @@ body {
   overflow: visible;
 }
 
-.left-links{
+dt {
   font-weight: bold;
-  font-size: larger;
 }
 
 .header, .footer{
@@ -26,17 +40,13 @@ body {
   align-content: flex-start;
 }
 
-ul{
-  display: flex;
-  gap: 16px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+ins {
+  text-decoration: none;
 }
 
-a {
-  color: rgba(228, 223, 218, 1);
-  text-decoration: none;
+.left-links{
+  font-weight: bold;
+  font-size: larger;
 }
 
 .quotecontent {
@@ -45,12 +55,34 @@ a {
   justify-content: center;
 }
 
-.b3content{
-  color:  rgba(228, 223, 218, 1);
-  width: 800px;
-  padding: 1em;
+.results-info-row{
+  display: flex;
+  align-content: flex-start;
+}
+
+.tests-results{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 1em;
+  padding-bottom: 2em;
+}
+
+th, td {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+tr, th {
+  border-bottom: 1px solid #ddd;
+  padding: 15px;
+}
+
+ul{
+  display: flex;
+  gap: 16px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'rspec'
 require 'rack/handler/puma'
 require 'csv'
 require_relative './import_from_csv'
