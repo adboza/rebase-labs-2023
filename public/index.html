@@ -15,11 +15,18 @@
       <li> Healthy Dragon Laboratórios</li>
     </ul>
     <ul class="right-links">
-      <li>Algum conteúdo a ser definido target</li>
+      <li><button id="get-db">Exibe todo DB</button></li>
     </ul>
   </div>
 
-  <div class="tests-results" style="visibility: hidden; visibility: collapse;" >
+  <div id="full-db" style="visibility: hidden; visibility: collapse;">
+    <div class="full-db-table">
+      <table id="full-table">
+      </table>
+    </div>
+  </div>
+
+  <div class="tests-results" style="visibility: hidden; visibility: collapse;">
     <div class="results-info">
       <h3 id="exam-info-title">Exames token <ins id="exam-token-number">ABC123</ins></h3>
       <dl class="this-exam-info">
@@ -61,5 +68,37 @@
   <div class="footer">
     <p>By Adriana Boza | Images: StorySet</p>
   </div>
+
+  <script>
+    document.getElementById("get-db").addEventListener('click', getDB);
+
+    
+
+    function getDB(){
+      var tableParent = document.getElementById('full-table');
+      var fullDbDiv = document.getElementById('full-db');
+      fetch('http://localhost:3000/tests', { method: "GET", mode: 'no-cors'})
+      .then((res) => res.json())
+      .then((data) => {
+        let tableContent = `
+          <tr class=&quot;results-th&quot;>
+            <th>CPF</th>
+            
+          </tr>`;
+
+        data.forEach(function tableContents(tc){
+          tableContent += `
+            <tr class="results-row">
+              <td>${tc.cpf}</td>
+              
+            </tr>`;
+        });
+        tableParent.innerHTML = tableContent;
+      });
+      fullDbDiv.style.visibility = 'visible';
+    }
+
+
+  </script>
 </body>
 </html>
