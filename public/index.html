@@ -81,16 +81,22 @@
       .then((res) => res.json())
       .then((data) => {
         let tableContent = `
-          <tr class=&quot;results-th&quot;>
+          <tr class="results-th">
             <th>CPF</th>
-            
+            <th>Tipo Exame</th>
+            <th>Limites</th>
+            <th>Resultado</th>
+            <th>Token</th>
           </tr>`;
 
         data.forEach(function tableContents(tc){
           tableContent += `
             <tr class="results-row">
               <td>${tc.cpf}</td>
-              
+              <td>${tc.tipo_exame}</td>
+              <td>${tc.limites_tipo_exame}</td>
+              <td>${tc.resultado_tipo_exame}</td>
+              <td>${tc.token_resultado_exame}</td>
             </tr>`;
         });
         tableParent.innerHTML = tableContent;

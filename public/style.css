@@ -49,6 +49,16 @@ dt {
   font-weight: bold;
 }
 
+#full-db{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1em;
+  padding-bottom: 2em;
+  background-color: white;
+}
+
 .header, .footer{
   background-color: #39393aff;
   color: rgba(228, 223, 218, 1);
@@ -96,7 +106,7 @@ th, td {
   text-transform: capitalize;
 }
 
-tr, th {
+tr {
   border-bottom: 1px solid #ddd;
   padding: 15px;
 }
