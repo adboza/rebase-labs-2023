@@ -91,6 +91,10 @@ ins {
   align-content: flex-start;
 }
 
+table {
+  border-collapse: collapse;
+}
+
 .tests-results{
   display: flex;
   flex-direction: column;
@@ -104,11 +108,13 @@ ins {
 th, td {
   text-align: center;
   text-transform: capitalize;
+  border-bottom: 1px solid #39393aff;
+  border-left-style: none;
+  padding: 15px;
 }
 
-tr {
-  border-bottom: 1px solid #ddd;
-  padding: 15px;
+tr:hover {
+  background-color: #f06c9a38;
 }
 
 ul{

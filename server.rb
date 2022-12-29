@@ -20,7 +20,7 @@ end
 get '/tests' do
   ImportFromCsv.new
   conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
-  exams = conn.exec("SELECT * FROM EXAMS")
+  exams = conn.exec("SELECT * FROM EXAMS LIMIT 100")
   exams.map { |tuple| tuple }.to_json
 end
 
