@@ -24,6 +24,21 @@ get '/tests' do
   exams.map { |tuple| tuple }.to_json
 end
 
+get '/tests_list/limit/*/offset/*' do
+  conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
+  exams = conn.exec("SELECT * FROM EXAMS LIMIT #{params['splat'].first} OFFSET #{params['splat'].last}")
+  exams.map { |tuple| tuple }.to_json
+end
+
+
+get '/tests/count' do
+  conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
+  exams = conn.exec("SELECT COUNT(id) FROM EXAMS")
+  puts exams
+  puts exams[0].first
+  exams.map { |tuple| tuple }.to_json
+end
+
 get '/hello' do
   'Hello world! updated'
 end

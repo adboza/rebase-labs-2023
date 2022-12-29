@@ -45,6 +45,11 @@ button:hover {
   background-color: #f06c9b;
 }
 
+#buttons-area {
+  display: flex;
+  margin: 20px;
+}
+
 dt {
   font-weight: bold;
 }

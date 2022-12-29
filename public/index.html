@@ -24,6 +24,7 @@
       <table id="full-table">
       </table>
     </div>
+    <div id="buttons-area"></div>
   </div>
 
   <div class="tests-results" style="visibility: hidden; visibility: collapse;">
@@ -70,18 +71,19 @@
   </div>
 
   <script>
-    document.getElementById("get-db").addEventListener('click', getDB);
+    document.getElementById("get-db").addEventListener('click', getDB(100, 0));
 
     
 
-    function getDB(){
+    function getDB(limit, offset){
       var tableParent = document.getElementById('full-table');
       var fullDbDiv = document.getElementById('full-db');
-      fetch('http://localhost:3000/tests', { method: "GET", mode: 'no-cors'})
+      fetch(`http://localhost:3000/tests_list/limit/${limit}/offset/${offset}`, { method: "GET", mode: 'no-cors'})
       .then((res) => res.json())
       .then((data) => {
         let tableContent = `
           <tr class="results-th">
+            <th>ID</th>
             <th>CPF</th>
             <th>Tipo Exame</th>
             <th>Limites</th>
@@ -92,6 +94,7 @@
         data.forEach(function tableContents(tc){
           tableContent += `
             <tr class="results-row">
+              <td>${tc.id}</td>
               <td>${tc.cpf}</td>
               <td>${tc.tipo_exame}</td>
               <td>${tc.limites_tipo_exame}</td>
@@ -100,6 +103,32 @@
             </tr>`;
         });
         tableParent.innerHTML = tableContent;
+
+        function setNextButtons(){
+          let total = 299;
+          let times = Math.ceil(total/100.0);
+          var buttons_area = document.getElementById('buttons-area')
+          while (buttons_area.hasChildNodes()) {
+            buttons_area.removeChild(buttons_area.firstChild);
+          }
+
+          if (times >= 0) {
+            for(let count = 0; count < times; count++){
+              var new_button = document.createElement('button');
+              new_button.id = 'nextTests'+count;
+              console.log(new_button.id);
+              console.log(new_button.id);
+              console.log(document.getElementById('buttons-area'));
+              console.log(times);
+              console.log(count);
+              var new_button_text = document.createTextNode(`${(count*100)+1} - ${(count*100)+100}`);
+              new_button.appendChild(new_button_text);
+              buttons_area.appendChild(new_button);
+              //new_button.addEventListener('dblclick', getDB(100,(count*100)))
+            };
+          };
+        };
+        setNextButtons()
       });
       fullDbDiv.style.visibility = 'visible';
     }
