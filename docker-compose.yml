@@ -6,6 +6,7 @@ services:
     working_dir: /app
     volumes: 
       - .:/app
+      - ./app:/var/lib/app
       - rubygems_rebase_labs:/usr/local/bundle
       - gemconfig:/root/.local/share/gem
     networks:

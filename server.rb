@@ -31,7 +31,7 @@ end
 get '/' do
   #send_file File.expand_path('./src/index.html', settings.public_folder)
 
-  File.read('./public/index.html')
+  File.read('./app/views/index.html')
 end
 
 Rack::Handler::Puma.run(
