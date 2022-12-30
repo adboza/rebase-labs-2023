@@ -72,8 +72,56 @@
 
   <script>
     document.getElementById("get-db").addEventListener('click', getDB(100, 0));
+    let total = 299;
+    let times = Math.ceil(total/100.0);
+    setNextButtons();
+    addEventToButtons();
+    let substitutoTotal;
 
-    
+    fetch('http://localhost:3000/tests/count', { method: "GET", mode: 'no-cors'})
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach(function tableContents(tc){
+          substitutoTotal = tc.count;
+          console.log(substitutoTotal);
+          console.log(substitutoTotal);
+          console.log(substitutoTotal);
+        });
+      }
+    );
+
+    function setNextButtons(){
+      var buttons_area = document.getElementById('buttons-area')
+      while (buttons_area.hasChildNodes()) {
+        buttons_area.removeChild(buttons_area.firstChild);
+      }
+
+      if (times >= 0) {
+        for(let count = 0; count < times; count++){
+          var new_button = document.createElement('button');
+          new_button.id = 'nextTests'+count;
+          console.log(new_button.id);
+          console.log(new_button.id);
+          console.log(document.getElementById('buttons-area'));
+          console.log(times);
+          console.log(count);
+          var new_button_text = document.createTextNode(`${(count*100)+1} - ${(count*100)+100}`);
+          new_button.appendChild(new_button_text);
+          buttons_area.appendChild(new_button);
+        };
+      };
+    }
+
+    function addEventToButtons(){
+      for(let count = 0; count < times; count++){
+        let buttonId = 'nextTests'+count;
+        console.log(buttonId);
+        console.log(buttonId);
+        console.log(buttonId);
+        let this_offset = count*100
+        document.getElementById(buttonId).addEventListener('click', getDB(100,(this_offset)))
+      }
+    }
 
     function getDB(limit, offset){
       var tableParent = document.getElementById('full-table');
@@ -102,37 +150,12 @@
               <td>${tc.token_resultado_exame}</td>
             </tr>`;
         });
+        tableParent.innerHTML = "";
         tableParent.innerHTML = tableContent;
 
-        function setNextButtons(){
-          let total = 299;
-          let times = Math.ceil(total/100.0);
-          var buttons_area = document.getElementById('buttons-area')
-          while (buttons_area.hasChildNodes()) {
-            buttons_area.removeChild(buttons_area.firstChild);
-          }
-
-          if (times >= 0) {
-            for(let count = 0; count < times; count++){
-              var new_button = document.createElement('button');
-              new_button.id = 'nextTests'+count;
-              console.log(new_button.id);
-              console.log(new_button.id);
-              console.log(document.getElementById('buttons-area'));
-              console.log(times);
-              console.log(count);
-              var new_button_text = document.createTextNode(`${(count*100)+1} - ${(count*100)+100}`);
-              new_button.appendChild(new_button_text);
-              buttons_area.appendChild(new_button);
-              //new_button.addEventListener('dblclick', getDB(100,(count*100)))
-            };
-          };
-        };
-        setNextButtons()
       });
       fullDbDiv.style.visibility = 'visible';
     }
-
 
   </script>
 </body>
