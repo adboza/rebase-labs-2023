@@ -31,11 +31,9 @@ services:
     working_dir: /app
     volumes: 
       - .:/app
-      - .:/spec
+      - ./spec:/spec
       - rubygems_rebase_labs:/usr/local/bundle
       - gemconfig:/root/.local/share/gem
-    networks:
-      - rebase-labs
     command: bash -c "bundle exec rspec"
 
 volumes:
