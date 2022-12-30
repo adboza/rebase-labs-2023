@@ -28,7 +28,7 @@ body {
 button {
   border: none;
   color: black;
-  padding: 15px 32px;
+  padding: 2px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -46,7 +46,9 @@ button:hover {
 }
 
 #buttons-area {
+  max-width: auto;
   display: flex;
+  flex-flow: row wrap;
   margin: 20px;
 }
 
@@ -62,6 +64,10 @@ dt {
   padding-top: 1em;
   padding-bottom: 2em;
   background-color: white;
+}
+
+#get-db{
+  padding: 15px 32px;
 }
 
 .header, .footer{

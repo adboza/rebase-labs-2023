@@ -34,8 +34,6 @@ end
 get '/tests/count' do
   conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
   exams = conn.exec("SELECT COUNT(id) FROM EXAMS")
-  puts exams
-  puts exams[0].first
   exams.map { |tuple| tuple }.to_json
 end
 
@@ -44,8 +42,6 @@ get '/hello' do
 end
 
 get '/' do
-  #send_file File.expand_path('./src/index.html', settings.public_folder)
-
   File.read('./public/index.html')
 end
 
