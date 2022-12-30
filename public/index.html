@@ -71,7 +71,11 @@
   </div>
 
   <script>
-    document.getElementById("get-db").addEventListener('click', getDB(100, 0));
+    document.getElementById("get-db").addEventListener('click', (event) => {
+          event.preventDefault();
+          setNextButtons();
+          getDB(100, 0)}
+        );
 
     function setNextButtons(){
       var buttons_area = document.getElementById('buttons-area');
@@ -139,7 +143,6 @@
         tableParent.innerHTML = tableContent;
 
       });
-      setNextButtons();
       fullDbDiv.style.visibility = 'visible';
     }
 
