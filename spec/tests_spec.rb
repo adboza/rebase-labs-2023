@@ -23,6 +23,5 @@ RSpec.describe 'Encontra resultados a partir do banco de dados', type: :system d
     expect(last_response.body).to have_content('Healthy Dragon Laboratórios')
     expect(last_response.body).to have_content('A Healthy Dragon realiza análises laboratoriais com excelência!')
     expect(last_response.body).to have_button('Exibe todo DB')
-
   end
 end

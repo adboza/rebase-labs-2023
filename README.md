@@ -8,6 +8,17 @@ Uma app web para listagem de exames médicos.
 Este projeto é parte do curso Rebase Labs, patrocinado por [Rebase](https://rebase.com.br/) e [Campus Code](https://www.campuscode.com.br/).
 Acompanhamento do progresso disponível em: [Trello - Rebase Labs Card](https://trello.com/c/2IUQpLu4/42-rebase-labs)
 
+## Rodando a aplicação
+
+**Clone o repositório** <br>
+`git clone git@github.com:adboza/rebase-labs-2023.git`<br>
+**Instale as imagens do Docker com o comando:** <br>
+`docker compose up` <br>
+**Acesse a aplicação em:** <br>
+<p>http://localhost:3000</p>
+
+**Os testes podem ser verificados com o comando:** <br>
+`make this-rspec` <br>
 
 ## Tech Stack
 

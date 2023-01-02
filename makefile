@@ -10,5 +10,7 @@ server:
 bundle:
 	@docker compose run app bundle \
 
-rspec:
-	@docker compose run rspec \
+this-rspec:
+	@docker container exec \
+	-it rebase-labs \
+	bash -c "rspec" \
