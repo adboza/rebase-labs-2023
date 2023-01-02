@@ -1,34 +1,28 @@
 require 'spec_helper'
-#require_relative './spec_helper.rb'
+require './app'
 
-RSpec.describe 'Encontra resultados a partir do banco de dados', {:type => :feature}  do
+RSpec.describe 'Encontra resultados a partir do banco de dados', type: :system do
 
-  # def app
-  #     Sinatra::Application    
-  # end
+  def app
+    Sinatra::Application    
+  end
+  
   it 'GET /tests' do
-    def app
-      Sinatra::Application
-    end
 
-    conn =  PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
-
-    result_json = conn.exec('SELECT * FROM EXAMS LIMIT 100')
-    result_json.map { |tuple| tuple }.to_json
     get('/tests')
 
     expect(last_response.status).to eq 200
-    expect(last_response.body).to eq result_json
+    expect(last_response.body).to have_content 'estado_patiente'
   end
 
   it 'get /tests com sucesso' do
-    def app
-      Sinatra::Application
-    end
 
     get('/')
+
     expect(last_response.status).to eq 200
-    expect(last_response.body).to eq("")
+    expect(last_response.body).to have_content('Healthy Dragon Laboratórios')
+    expect(last_response.body).to have_content('A Healthy Dragon realiza análises laboratoriais com excelência!')
+    expect(last_response.body).to have_button('Exibe todo DB')
 
   end
 end
