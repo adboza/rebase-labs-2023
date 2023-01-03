@@ -15,7 +15,7 @@ RSpec.describe 'Encontra resultados a partir do banco de dados', type: :system d
     expect(last_response.body).to have_content 'estado_patiente'
   end
 
-  it 'get /tests com sucesso' do
+  it 'get / com sucesso' do
 
     get('/')
 

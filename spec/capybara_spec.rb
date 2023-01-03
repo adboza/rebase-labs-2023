@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'capybara/rspec'
+require 'webdrivers'
 
 RSpec.describe 'Loading the app under test', type: :feature do
   it 'displays the home page' do

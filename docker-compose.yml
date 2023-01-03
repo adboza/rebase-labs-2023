@@ -27,7 +27,30 @@ services:
       POSTGRES_HOST_AUTH_METHOD: 'trust'
       POSTGRES_DB: 'medical_records'
     networks:
-    - rebase-labs
+      - rebase-labs
+
+  # selenium:                                        # Selenium container
+  #   image: selenium/standalone-chrome
+  #   ports:
+  #     - "4444:4444"
+  #   logging:                                       # Disable spamming irrelevant messages from this container
+  #     driver: none
+  #   networks:
+  #     - rebase-labs                               # Container name in virtual network that can be addressed
+  # chromedriver:
+  #   container_name: chromedriver
+  #   image: openstax/selenium-chrome
+  #   working_dir: /app
+  #   volumes: 
+  #     - .:/app
+  #     - rubygems_rebase_labs:/usr/local/bundle
+  #     - gemconfig:/root/.local/share/gem
+  #   links:
+  #     - app
+  #   networks:
+  #     - rebase-labs
+  #   ports:
+  #     - '4444:4444'
 
 volumes:
   rubygems_rebase_labs:
