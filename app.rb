@@ -50,9 +50,16 @@ end
 
 post '/import' do
   rows = request.body.read.to_json
-  puts rows
-  puts "$$$$$$$$$$$$ Is it a file type ?A: =#{rows.class}= this is the answer"
+  # rows=request.body.read
   puts '$$$$$$$$$ got inside post(import) $$$$$$$$$$$$'
+
+  #puts request.params['csv']['tempfile']
+  puts "$$$$$$$$$$$$ Is it a file type ?A: =#{rows.class}= this is the answer"
+
+  puts rows
+  #csv = params['csv']['tempfile']
+  
+
   
   MyJob.perform_async(rows)
 end

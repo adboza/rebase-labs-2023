@@ -1,5 +1,5 @@
 require 'sidekiq'
-require_relative '../../import_from_csv'
+require_relative '../../import_from_csv.rb'
 
 
 class MyJob
@@ -7,7 +7,7 @@ class MyJob
 
   def perform(csv)
     puts '$$$$$$$$$ got inside perform(csv) Its done!! $$$$$$$$$$$$'
-
+    puts csv
     ImportFromCsv.insert_data(csv)
   end
 end

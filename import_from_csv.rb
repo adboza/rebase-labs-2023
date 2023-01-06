@@ -1,5 +1,6 @@
 require 'csv'
 require 'pg'
+require 'sidekiq'
 
 class ImportFromCsv
   attr_reader :connection

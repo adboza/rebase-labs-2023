@@ -4,7 +4,7 @@ server:
 	--rm \
 	--service-ports \
 	app \
-	--network rebase-labs 
+	--network rebase-labs \
 	bash -c "ruby server.rb"
 
 bundle:
