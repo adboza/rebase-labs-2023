@@ -1,7 +1,7 @@
 require 'spec_helper'
 require './app'
 
-RSpec.describe 'Encontra resultados a partir do banco de dados', type: :system do
+RSpec.describe 'Encontra resultados a partir do banco de dados', type: :feature do
 
   def app
     Sinatra::Application    
@@ -25,8 +25,25 @@ RSpec.describe 'Encontra resultados a partir do banco de dados', type: :system d
     expect(last_response.body).to have_button('Exibe todo DB')
   end
 
-  it 'post api/:results' do
-    this_file = File.read('')
-    post("api/#{this_file}")
+
+  it 'get /tests/count' do
+
+    get('/tests/count')
+    json_response = JSON.parse(last_response.body)
+
+    expect(last_response.status).to eq 200
+    expect(last_response.body).to have_content('count')
+    expect(json_response.length).to eq 1
+  end
+
+
+  it 'get /tests_list/limit/*/offset/*' do
+
+    get('/tests_list/limit/100/offset/30')
+    json_response = JSON.parse(last_response.body)
+
+    expect(last_response.status).to eq 200
+    expect(last_response.body).to have_content 'estado_patiente'
+    expect(json_response.length).to eq 100
   end
 end

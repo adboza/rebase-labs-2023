@@ -7,7 +7,7 @@ class ImportFromCsv
   def initialize(csv_path='./data.csv')
     @connection = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
     create_table
-    insert_data(csv_iteration(csv_file))
+    insert_data(csv_iteration())
   end
 
   def create_table
@@ -63,6 +63,6 @@ class ImportFromCsv
         column = columns[idx]
         acc[column] = cell
       end
-    end.to_json
+    end
   end
 end
