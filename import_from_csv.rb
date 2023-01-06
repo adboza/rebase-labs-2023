@@ -4,16 +4,16 @@ require 'pg'
 class ImportFromCsv
   attr_reader :connection
 
-  def initialize
+  def initialize(csv_path='./data.csv')
     @connection = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
     create_table
-    insert_data
+    insert_data(csv_file)
   end
 
   def create_table
-    @connection.exec("DROP TABLE IF EXISTS EXAMS")
+    #@connection.exec("DROP TABLE IF EXISTS EXAMS")
     @connection.exec("
-        CREATE TABLE EXAMS(
+        CREATE TABLE IF NOT EXISTS EXAMS(
           id SERIAL PRIMARY KEY,
           cpf VARCHAR(14),
           nome_paciente VARCHAR(140),
@@ -35,8 +35,8 @@ class ImportFromCsv
     ")
   end
 
-  def insert_data
-    csv_iteration.each do |row|
+  def insert_data(csv_file)
+    csv_iteration(csv_file).each do |row|
       @connection.exec(
         "INSERT INTO EXAMS (cpf, nome_paciente, email_paciente, data_nascimento_paciente, 
           endereço_rua_paciente, cidade_paciente, estado_patiente, crm_médico,
@@ -50,10 +50,11 @@ class ImportFromCsv
                   '#{row['tipo exame']}', '#{row['limites tipo exame']}', #{row['resultado tipo exame'].to_i})"
       )
     end
+    puts '$$$$$$$$$ got inside insert_data(csv_file) $$$$$$$$$$$$'
   end
 
-  def csv_iteration
-    rows = CSV.read("./data.csv", col_sep: ';')
+  def csv_iteration(csv_file='./data.csv')
+    rows = CSV.read(csv_file, col_sep: ';')
 
     columns = rows.shift
 

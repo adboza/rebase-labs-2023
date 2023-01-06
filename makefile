@@ -14,3 +14,8 @@ this-rspec:
 	@docker container exec \
 	-it rebase-labs \
 	bash -c "rspec" \
+
+sidekiq:	
+	@docker container exec \
+	-it rebase-labs \
+	bash -c "sidekiq -r ./app/jobs/*" \

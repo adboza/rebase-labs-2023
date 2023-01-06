@@ -3,6 +3,7 @@ require 'rspec'
 require 'rack/handler/puma'
 require 'csv'
 require_relative './import_from_csv'
+require './app/jobs/my_job'
 
 
 get '/json_test' do
@@ -44,4 +45,20 @@ end
 
 get '/' do
   File.read('./public/index.html')
+end
+
+post '/import' do
+  csv = request.body.read.gsub('%', ' ')
+  body = request.body.read
+  puts '$$$$$$$$$ got inside post(import) $$$$$$$$$$$$'
+  
+  MyJob.perform_async(csv)
+  puts "Body: #{csv}"
+  # ImporterJob.enqueue(body)
+  
+  # params[:csv_file][:tempfile]
+  # path = params[:results]
+  # puts "csv_path is $$$$#{path}  $$$$"
+
+  # ImportFromCsv.new(path)
 end
