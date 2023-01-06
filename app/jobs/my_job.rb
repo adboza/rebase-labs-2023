@@ -1,4 +1,5 @@
 require 'sidekiq'
+require_relative '../../import_from_csv'
 
 class MyJob
   include Sidekiq::Job
