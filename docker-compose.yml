@@ -40,10 +40,16 @@ services:
     container_name: sidekiq
     restart: always
     image: ruby
-    command: bash -c "sidekiq -r ./app/jobs/*"
+    working_dir: /app
+    volumes:
+      - .:/app
+      - rubygems_rebase_labs:/usr/local/bundle
+      - gemconfig:/root/.local/share/gem
+    command: bash -c "bundle && sidekiq -r ./app/jobs/my_job.rb"
+    environment:
+      REDIS_URL: redis://redis:6379/0
     networks:
       - rebase-labs
-
 volumes:
   rubygems_rebase_labs:
   gemconfig:

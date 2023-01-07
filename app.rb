@@ -49,17 +49,22 @@ get '/' do
 end
 
 post '/import' do
-  rows = request.body.read.to_json
+
+  #rows = request.body.read.to_json
   # rows=request.body.read
   puts '$$$$$$$$$ got inside post(import) $$$$$$$$$$$$'
 
   #puts request.params['csv']['tempfile']
-  puts "$$$$$$$$$$$$ Is it a file type ?A: =#{rows.class}= this is the answer"
+  puts "$$$$$$$$$$$$ Is it a file type ?A: =#{}= this is the answer"
 
-  puts rows
+  #puts rows
   #csv = params['csv']['tempfile']
-  
+  csv = params[:results][:tempfile]
+  puts '$$$$$$$$$ csv.read and params inside post(import) $$$$$$$$$$$$'
+  puts csv.read
+  puts params
+  json_file = ImportFromCsv.new.csv_iteration(csv).to_json
 
   
-  MyJob.perform_async(rows)
+  MyJob.perform_async(json_file)
 end
