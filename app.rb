@@ -18,8 +18,21 @@ get '/tests_list/limit/*/offset/*' do
   exams.map { |tuple| tuple }.to_json
 end
 
+get '/tests/:token' do
+  conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
+  exams = conn.exec("
+                    SELECT token_resultado_exame AS #{'Token'},
+                      nome_paciente AS #{'Paciente'},
+                      data_exame,
+                      tipo_exame AS #{'Exame'},
+                      limites_tipo_exame AS #{'Limites'},
+                      resultado_tipo_exame AS #{'Resultado'}
+                      FROM EXAMS WHERE token_resultado_exame='#{params['token']}'")
+  exams.map { |tuple| tuple }.to_json
+end
 
-get '/tests/count' do
+
+get '/exams/count' do
   conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
   exams = conn.exec("SELECT COUNT(id) FROM EXAMS")
   exams.map { |tuple| tuple }.to_json

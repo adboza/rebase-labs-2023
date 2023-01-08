@@ -26,9 +26,9 @@ RSpec.describe 'Encontra resultados a partir do banco de dados', type: :feature 
   end
 
 
-  it 'get /tests/count' do
+  it 'get /exams/count' do
 
-    get('/tests/count')
+    get('/exams/count')
     json_response = JSON.parse(last_response.body)
 
     expect(last_response.status).to eq 200
@@ -45,5 +45,15 @@ RSpec.describe 'Encontra resultados a partir do banco de dados', type: :feature 
     expect(last_response.status).to eq 200
     expect(last_response.body).to have_content 'estado_patiente'
     expect(json_response.length).to eq 100
+  end
+
+  it 'get /tests/:token' do
+
+    get('/tests/TJUXC2')
+    json_response = JSON.parse(last_response.body)
+
+    expect(last_response.body).to have_content('TJUXC2')
+    expect(last_response.status).to eq 200
+    expect(json_response.length).to eq 13
   end
 end

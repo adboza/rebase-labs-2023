@@ -80,7 +80,7 @@
     function setNextButtons(){
       var buttons_area = document.getElementById('buttons-area');
       let total;
-      fetch('http://localhost:3000/tests/count', { method: "GET", mode: 'no-cors'})
+      fetch('http://localhost:3000/exams/count', { method: "GET", mode: 'no-cors'})
         .then((res) => res.json())
         .then((data) => {
           data.forEach(function tableContents(tc){
