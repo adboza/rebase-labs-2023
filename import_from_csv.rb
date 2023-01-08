@@ -36,8 +36,8 @@ class ImportFromCsv
     ")
   end
 
-  def insert_data(csv_file)
-    csv_iteration(csv_file).each do |row|
+  def insert_data(json_file)
+    JSON.parse(json_file).each do |row|
       @connection.exec(
         "INSERT INTO EXAMS (cpf, nome_paciente, email_paciente, data_nascimento_paciente, 
           endereço_rua_paciente, cidade_paciente, estado_patiente, crm_médico,
@@ -66,7 +66,7 @@ class ImportFromCsv
         acc[column] = cell
         puts "-*-*%%%%%%%%%%%%%%%%%%% cell: #{cell} | acc: #{acc} | idx: #{idx} | column: #{column}"
       end
-    end
+    end.to_json
   end
 
   # def from_json(csv_file)

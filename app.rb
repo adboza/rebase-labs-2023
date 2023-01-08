@@ -8,7 +8,8 @@ require './app/jobs/my_job.rb'
 
 get '/populate_db_2611' do
   this_data = ImportFromCsv.new.create_table
-  ImportFromCsv.new.insert_data('./data.csv')
+  this_json_file = ImportFromCsv.new.csv_iteration('./data.csv')
+  ImportFromCsv.new.insert_data(this_json_file)
   redirect '/tests/count'
 end
 
@@ -50,7 +51,7 @@ post '/import' do
   puts '$$$$$$$$$ csv.read and params inside post(import) $$$$$$$$$$$$'
   puts csv.read
   puts params
-  json_file = ImportFromCsv.new.csv_iteration(csv).to_json
+  json_file = ImportFromCsv.new.csv_iteration(csv)
 
   
   MyJob.perform_async(json_file)
