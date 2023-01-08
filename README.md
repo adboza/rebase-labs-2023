@@ -17,7 +17,7 @@ Acompanhamento do progresso disponível em: [Trello - Rebase Labs Card](https://
 **Acesse a aplicação em:** <br>
 <p>http://localhost:3000</p>
 
-**Os testes podem ser verificados com o comando:** <br>
+**Os testes podem ser verificados em outro bash com o comando:** <br>
 `make this-rspec` <br>
 
 ## Tech Stack

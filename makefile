@@ -15,7 +15,7 @@ this-rspec:
 	-it rebase-labs \
 	bash -c "rspec" \
 
-sidekiq:	
+seed-db:	
 	@docker container exec \
 	-it rebase-labs \
-	bash -c "sidekiq -r ./app/jobs/*" \
+	bash -c "ruby import_from_csv.rb" \
