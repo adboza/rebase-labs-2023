@@ -5,10 +5,10 @@ require 'sidekiq'
 class ImportFromCsv
   attr_reader :connection
 
-  def initialize(csv_path='./data.csv')
+  def initialize
     @connection = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
-    create_table
-    insert_data(csv_iteration())
+    # create_table
+    # insert_data(csv_file)
   end
 
   def create_table
@@ -36,8 +36,8 @@ class ImportFromCsv
     ")
   end
 
-  def insert_data(hash_file)
-    hash_file.each do |row|
+  def insert_data(csv_file)
+    csv_iteration(csv_file).each do |row|
       @connection.exec(
         "INSERT INTO EXAMS (cpf, nome_paciente, email_paciente, data_nascimento_paciente, 
           endereço_rua_paciente, cidade_paciente, estado_patiente, crm_médico,
@@ -50,20 +50,40 @@ class ImportFromCsv
                   '#{row['token resultado exame']}', '#{row['data exame']}',
                   '#{row['tipo exame']}', '#{row['limites tipo exame']}', #{row['resultado tipo exame'].to_i})"
       )
+      puts "#{row['token resultado exame']}"
     end
-    puts '$$$$$$$$$ got inside insert_data(csv_file) $$$$$$$$$$$$'
+    puts '$$$$$$$$$ got outside insert_data(csv_file) $$$$$$$$$$$$'
   end
 
-  def csv_iteration(csv_file='./data.csv')
+  def csv_iteration(csv_file)
     rows = CSV.read(csv_file, col_sep: ';')
-
     columns = rows.shift
-
+    puts '%%%%%%%%%%%%%%%%%%% Here comes the columns content inside csv_iteration(csv_file)'
+    puts columns
     rows.map do |row|
       row.each_with_object({}).with_index do |(cell, acc), idx|
         column = columns[idx]
         acc[column] = cell
+        puts "-*-*%%%%%%%%%%%%%%%%%%% cell: #{cell} | acc: #{acc} | idx: #{idx} | column: #{column}"
       end
     end
   end
+
+  # def from_json(csv_file)
+  #   json_file = ImportFromCsv.new.csv_iteration(csv_file).to_json
+  #   csv = File.write('awesome.csv', CSV.generate do |c|
+  #     JSON.parse(json_file).each do |hash|
+  #       c << hash.row['cpf']
+        
+  #       ('#{row['cpf']}', '#{row['nome paciente']}', '#{row['email paciente']}', '#{row['data nascimento paciente']}', '#{row['endereço/rua paciente']}',
+  #         '#{@connection.escape_string(row['cidade paciente'])}', '#{row['estado patiente']}',
+  #         '#{row['crm médico']}', '#{row['crm médico estado']}',
+  #         '#{row['nome médico']}', '#{row['email médico']}',
+  #         '#{row['token resultado exame']}', '#{row['data exame']}',
+  #         '#{row['tipo exame']}', '#{row['limites tipo exame']}', #{row['resultado tipo exame'].to_i})
+  #     end
+  #   end)
+  #   puts "%%%%%%%%%%% From JSON to CSV file #{csv.class} %%%%%%%%%%%%%%%"
+  #   ImportFromCsv.new.insert_data(csv)
+  # end
 end

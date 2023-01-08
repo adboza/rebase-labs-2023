@@ -6,22 +6,13 @@ require 'json'
 require_relative './import_from_csv'
 require './app/jobs/my_job.rb'
 
-
-get '/json_test' do
-  rows = CSV.read("./data.csv", col_sep: ';')
-
-  columns = rows.shift
-
-  rows.map do |row|
-    row.each_with_object({}).with_index do |(cell, acc), idx|
-      column = columns[idx]
-      acc[column] = cell
-    end
-  end.to_json
+get '/populate_db_2611' do
+  this_data = ImportFromCsv.new.create_table
+  ImportFromCsv.new.insert_data('./data.csv')
+  redirect '/tests/count'
 end
 
 get '/tests' do
-  ImportFromCsv.new
   conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
   exams = conn.exec("SELECT * FROM EXAMS LIMIT 100")
   exams.map { |tuple| tuple }.to_json
@@ -38,10 +29,6 @@ get '/tests/count' do
   conn = PG.connect(host: 'postgres', dbname: 'medical_records', user: 'postgres')
   exams = conn.exec("SELECT COUNT(id) FROM EXAMS")
   exams.map { |tuple| tuple }.to_json
-end
-
-get '/hello' do
-  'Hello world! updated'
 end
 
 get '/' do
