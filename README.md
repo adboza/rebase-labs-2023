@@ -12,8 +12,12 @@ Acompanhamento do progresso disponível em: [Trello - Rebase Labs Card](https://
 
 **Clone o repositório** <br>
 `git clone git@github.com:adboza/rebase-labs-2023.git`<br>
+**Acesse a pasta** <br>
+`cd rebase-labs-2023`<br>
 **Instale as imagens do Docker com o comando:** <br>
 `docker compose up` <br>
+**Popule o banco de dados com o comando:** <br>
+`make seed-db` <br>
 **Acesse a aplicação em:** <br>
 <p>http://localhost:3000</p>
 
@@ -73,21 +77,22 @@ Endpoint para exibir informações de exames agrupadas por token.
 
 Principais funções da página estão na navbar:
 
-image.png
+![image](https://user-images.githubusercontent.com/99356646/211236752-53fc6bd6-a248-4dcc-9db7-b1f3509d3b25.png)
 
 #### Botão "Exibe todo DB"
 Por meio dos endpoints `GET /tests/count` e `GET /tests_list/limit/*/offset/` exibe as 100 primeiras ocorrências e uma lista de botões para a exibição do restante das entradas.
 
-image.png
+![image](https://user-images.githubusercontent.com/99356646/211236866-60c6148c-f95e-469c-afc7-e0e79498d9c1.png)
+
 
 #### Buscar token exame
 Aproveitando o endpoint `GET /tests/token` exibe de forma amigável os resultados dos exames de determinado token.
-![d3b7223723c4f625a2940c4309ae408e.png](:/c9023f9d3b384d4eb25d026b4fb56789)
+![image](https://user-images.githubusercontent.com/99356646/211236675-7c0941fb-e712-442a-a0da-2dab43948d41.png)
 
 
 ## Futuro do projeto
 - [ ]  Criar restrição de entradas únicas de dados para token de exames;
 - [ ]  Melhorar respostas ao usuário em caso de erros do banco de dados;
 - [ ]  Criar ambiente de testes no Postgres com integração temporária ao banco de dados;
-- [ ]  Melhorar o banco de dados com a criação de 4 tabelas: USERS, DOCTORS, RESULTS, EXAM_TYPES.
+- [ ]  Melhorar o banco de dados com a criação de 4 tabelas: USERS, DOCTORS, RESULTS, EXAM_TYPES;
 - [ ]  Gerar container docker que possibilite testes front-end.
