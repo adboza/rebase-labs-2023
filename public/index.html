@@ -15,6 +15,12 @@
       <li> Healthy Dragon Laboratórios</li>
     </ul>
     <ul class="right-links">
+      <li><form id="searchToken">
+        <input type="text" id="token" name="token" placeholder="Buscar token exame">
+        <button type="submit" id="get-token" value="Submit">Buscar</button>
+      </form>
+      </li>
+
       <li><button id="get-db">Exibe todo DB</button></li>
     </ul>
   </nav>
@@ -27,15 +33,15 @@
     <div id="buttons-area"></div>
   </div>
 
-  <div class="tests-results" style="visibility: hidden; visibility: collapse;">
+  <div id="fullTokenDiv" class="tests-results" style="visibility: hidden; visibility: collapse;">
     <div class="results-info">
       <h3 id="exam-info-title">Exames token <ins id="exam-token-number">ABC123</ins></h3>
       <dl class="this-exam-info">
         <div class="results-info-row">
-          <dt>Paciente: </dt><dd id="patient-name">Fulana de Tal</dd><dd>&nbsp;-&nbsp;</dd><dt>CPF: </dt><dd id="patient-id">123.456.789-00</dd>
+          <dt>Paciente: </dt><dd id="patient-name">Fulana de Tal</dd><dd>&nbsp;&nbsp;</dd><dt>CPF: </dt><dd id="patient-id">123.456.789-00</dd>
         </div>
         <div class="results-info-row">
-          <dt>Médico(a) responsável: </dt><dd id="physician-name">Bertrana Ortiz</dd><dd>&nbsp;-&nbsp;</dd><dt>CRM: </dt><dd id="doctor-id">123.456-00</dd><dd>/</dd><dd id="doctor-state">AM</dd>
+          <dt>Médico(a) responsável: </dt><dd id="physician-name">Bertrana Ortiz</dd><dd>&nbsp;&nbsp;</dd><dt>CRM: </dt><dd id="doctor-id">123.456-00</dd><dd>/</dd><dd id="doctor-state">AM</dd>
         </div>
         <div class="results-info-row">
           <dt>Data do exame: </dt><dd id="exam-date">26/11/2018</dd>
@@ -45,15 +51,15 @@
 
     <div class="results-table">
       <table id="exams-table">
-        <tr>
+        <tr class="results-th">
           <th>Exame</th>
           <th>Limites</th>
           <th>Resultado</th>
         </tr>
-        <tr id="results-row">
-          <td id="exam-type">hemácias</td>
-          <td id="exam-limits">45 - 52</td>
-          <td id="exam-result">48</td>
+        <tr class="results-row">
+          <td>hemácias</td>
+          <td>45 - 52</td>
+          <td>48</td>
         </tr>
       </table>
     </div>
@@ -76,6 +82,7 @@
           setNextButtons();
           getDB(100, 0)}
         );
+    document.getElementById("searchToken").addEventListener('submit', searchToken)
 
     function setNextButtons(){
       var buttons_area = document.getElementById('buttons-area');
@@ -141,9 +148,53 @@
         });
         tableParent.innerHTML = "";
         tableParent.innerHTML = tableContent;
-
       });
       fullDbDiv.style.visibility = 'visible';
+    }
+
+    function searchToken(e){
+      e.preventDefault();
+      var patientName = document.getElementById('patient-name');
+      var patientCpf = document.getElementById('patient-id');
+      var physicianName = document.getElementById('physician-name');
+      var doctorCrm = document.getElementById('doctor-id');
+      var doctorState = document.getElementById('doctor-state');
+      var examDate = document.getElementById('exam-date');
+      var examsTable = document.getElementById('exams-table');
+      var fullTokenDiv = document.getElementById('fullTokenDiv');
+      var examTokenNumber = document.getElementById('exam-token-number')
+      
+      let token = document.getElementById('token').value;
+      fetch(`http://localhost:3000/tests/${token}`, { method: "GET", mode: 'no-cors'})
+      .then((res) => res.json())
+      .then((data) => {
+        let tableContent = `
+        <tr class="results-th">
+          <th>Exame</th>
+          <th>Limites</th>
+          <th>Resultado</th>
+        </tr>
+        `;
+        data.forEach(function iterateContents(tc){
+          examTokenNumber.innerHTML = `${tc.token}`;
+          patientName.innerHTML = `${tc.paciente}`;
+          patientCpf.innerHTML = `${tc.cpf}`;
+          physicianName.innerHTML = `${tc.nome_médico}`;
+          doctorCrm.innerHTML = `${tc.crm_médico}`;
+          doctorState.innerHTML = `${tc.crm_médico_estado}`;
+          examDate.innerHTML = `${tc.data_exame}`;
+          tableContent += `
+            <tr class="results-row">
+              <td>${tc.exame}</td>
+              <td>${tc.limites}</td>
+              <td>${tc.resultado}</td>
+            </tr>
+            `;
+        });
+        examsTable.innerHTML = "";
+        examsTable.innerHTML = tableContent;        
+      });
+      fullTokenDiv.style.visibility = 'visible';
     }
 
   </script>

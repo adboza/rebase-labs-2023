@@ -23,10 +23,14 @@ get '/tests/:token' do
   exams = conn.exec("
                     SELECT token_resultado_exame AS #{'Token'},
                       nome_paciente AS #{'Paciente'},
+                      cpf,
                       data_exame,
                       tipo_exame AS #{'Exame'},
                       limites_tipo_exame AS #{'Limites'},
-                      resultado_tipo_exame AS #{'Resultado'}
+                      resultado_tipo_exame AS #{'Resultado'},
+                      crm_médico,
+                      crm_médico_estado,
+                      nome_médico
                       FROM EXAMS WHERE token_resultado_exame='#{params['token']}'")
   exams.map { |tuple| tuple }.to_json
 end
