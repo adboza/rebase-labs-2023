@@ -86,11 +86,13 @@ Por meio dos endpoints `GET /tests/count` e `GET /tests_list/limit/*/offset/` ex
 
 
 #### Buscar token exame
-Aproveitando o endpoint `GET /tests/token` exibe de forma amigável os resultados dos exames de determinado token.
+<p>Aproveitando o endpoint `GET /tests/token` exibe de forma amigável os resultados dos exames de determinado token.</p>
 ![image](https://user-images.githubusercontent.com/99356646/211236675-7c0941fb-e712-442a-a0da-2dab43948d41.png)
 
 #### Botão "Importar resultados"
-Implementado um formulário para fazer o `post /import` de arquivos na página inicial.
+<p>Implementado um formulário para fazer o `post /import` de arquivos na página inicial.</p>
+![image](https://user-images.githubusercontent.com/99356646/211397644-26679007-1c5d-49e7-8dcf-34ebd77c6a05.png)
+
 
 ## Futuro do projeto
 - [ ]  Criar restrição de entradas únicas de dados para token de exames;
