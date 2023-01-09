@@ -33,7 +33,7 @@ Acompanhamento do progresso disponível em: [Trello - Rebase Labs Card](https://
 - [x] Endpoint  `/tests_list/limit/*/offset/` ;
 - [x] Endpoint `POST /import`  pode ser usado para importar os dados do CSV de forma assíncrona;
 - [x] Busca e exibição de dados de resultados amigável a partir de token;
-- [ ] Botão importar dados no front-end
+- [x] Botão importar dados no front-end
 
 
 ## Endpoints e front-end explicados
@@ -89,6 +89,8 @@ Por meio dos endpoints `GET /tests/count` e `GET /tests_list/limit/*/offset/` ex
 Aproveitando o endpoint `GET /tests/token` exibe de forma amigável os resultados dos exames de determinado token.
 ![image](https://user-images.githubusercontent.com/99356646/211236675-7c0941fb-e712-442a-a0da-2dab43948d41.png)
 
+#### Botão "Importar resultados"
+Implementado um formulário para fazer o `post /import` de arquivos na página inicial.
 
 ## Futuro do projeto
 - [ ]  Criar restrição de entradas únicas de dados para token de exames;

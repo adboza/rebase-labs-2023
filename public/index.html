@@ -71,9 +71,11 @@
     </div>
   </div>
 
-  <div class="b3content">
+  <div id="csvDiv" class="b3content">
     <form id="importCsv" enctype="multipart/form-data" method="post">
-      <label>Importar resultados .csv<input type="file" id="importSelection" name="results" required></label>
+      <label for="csvLabel">Importar resultados</label>
+      <input type="file" id="importSelection" name="results" required hidden>
+      <label id="csvLabel" for="importSelection">Escolher .csv</label>
       <button type="submit" id="getImport" value="Send File">Enviar arquivo</button>
     </form>
   </div>
@@ -83,12 +85,19 @@
   </div>
 
   <script>
+    document.getElementById('importSelection').addEventListener('change', (e) => {
+      let this_name = document.getElementById('importSelection').value;
+      let andn = this_name.split("\\");
+      document.getElementById('csvLabel').innerHTML = andn[andn.length-1];
+    });
+
     document.getElementById("get-db").addEventListener('click', (event) => {
           event.preventDefault();
           setNextButtons();
-          getDB(100, 0)}
-        );
-    document.getElementById("searchToken").addEventListener('submit', searchToken)
+          getDB(100, 0)
+    });
+
+    document.getElementById("searchToken").addEventListener('submit', searchToken);
 
     function setNextButtons(){
       var buttons_area = document.getElementById('buttons-area');
@@ -99,12 +108,10 @@
           data.forEach(function tableContents(tc){
             total = parseInt(tc.count);
           });
-
           let times = Math.ceil(total/100.0);
       while (buttons_area.hasChildNodes()) {
         buttons_area.removeChild(buttons_area.firstChild);
       }
-
       if (times >= 0) {
         for(let count = 0; count < times; count++){
           var new_button = document.createElement('button');
@@ -119,10 +126,9 @@
         );
         };
       };
-
       }
       );
-    }
+    };
 
     function getDB(limit, offset){
       var tableParent = document.getElementById('full-table');
@@ -156,7 +162,7 @@
         tableParent.innerHTML = tableContent;
       });
       fullDbDiv.style.visibility = 'visible';
-    }
+    };
 
     function searchToken(e){
       e.preventDefault();
@@ -201,23 +207,21 @@
         examsTable.innerHTML = tableContent;        
       });
       fullTokenDiv.style.visibility = 'visible';
-    }
+    };
 
-    const form = document.getElementById('importCsv');
-    console.log(form);
-    console.log(document.getElementById('importSelection').files[0]);
-    
+    const form = document.getElementById('importCsv');    
     const formData = new FormData();
-    console.log(formData);
     function importCsv (event) {
       event.preventDefault();
       const inputFile = document.getElementById('importSelection').value;
       formData.append('results', document.getElementById('importSelection').files[0])
-    fetch('http://localhost:3000/import', {
-      method: 'POST',
-      body: formData,
-    }).catch((error) => ('Algo deu errado!', error));
-      };
+      fetch('http://localhost:3000/import', {
+        method: 'POST',
+        body: formData,
+      })
+      .then((res) => document.getElementById('csvDiv').innerHTML = 'Arquivo .csv enviado, se necessário enviar outro atualize a página!')
+      .catch((error) => ('Algo deu errado!', error));
+    };
     form.addEventListener('submit', importCsv);
 
   </script>

@@ -25,7 +25,7 @@ body {
   background-color: #39393aff;
 }
 
-button {
+button, #csvLabel {
   border: none;
   color: black;
   padding: 2px;
@@ -40,7 +40,7 @@ button {
   transition-duration: 0.4s;
 }
 
-button:hover {
+button:hover, #csvLabel {
   color: white;
   background-color: #f06c9b;
 }
@@ -66,7 +66,7 @@ dt {
   background-color: white;
 }
 
-#get-db, #get-token, #token{
+#get-db, #get-token, #token, #csvLabel, #getImport{
   padding: 8px;
   font-size: 16px;
 }
@@ -83,6 +83,11 @@ dt {
 
 .header{
   align-content: flex-start;
+}
+
+.hidden{
+  visibility: hidden;
+  visibility: collapse;
 }
 
 ins {
@@ -137,4 +142,8 @@ ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.visible{
+  visibility: visible;
 }
