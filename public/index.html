@@ -89,7 +89,6 @@
           getDB(100, 0)}
         );
     document.getElementById("searchToken").addEventListener('submit', searchToken)
-    document.getElementById("importCsv").addEventListener('submit', importCsv)
 
     function setNextButtons(){
       var buttons_area = document.getElementById('buttons-area');
@@ -204,18 +203,22 @@
       fullTokenDiv.style.visibility = 'visible';
     }
 
-    function importCsv(e){
-      e.preventDefault();
-      const fileImput = document.querySelector(`input[results="pwd"]`);
-      const formData = new FormData();
-      formData.append('file', fileImput.files[0])
-
-      const options = {
-        method: 'POST',
-        body: formData
+    const form = document.getElementById('importCsv');
+    console.log(form);
+    console.log(document.getElementById('importSelection').files[0]);
+    
+    const formData = new FormData();
+    console.log(formData);
+    function importCsv (event) {
+      event.preventDefault();
+      const inputFile = document.getElementById('importSelection').value;
+      formData.append('results', document.getElementById('importSelection').files[0])
+    fetch('http://localhost:3000/import', {
+      method: 'POST',
+      body: formData,
+    }).catch((error) => ('Algo deu errado!', error));
       };
-      fetch('http://localhost:3000/import', options);
-      }
+    form.addEventListener('submit', importCsv);
 
   </script>
 </body>
