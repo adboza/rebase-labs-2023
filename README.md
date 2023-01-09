@@ -58,7 +58,7 @@ end
 ### GET /tests
 Exibe banco de dados, para não travar a aplicação e manter o exemplo solicitado neste momento exibe apenas os 100 primeiros resultados.
 
-### GET /exams					/count
+### GET /exams/count
 <p>Endpoint criado para resolver a tarefa de exibição amigável de informações. </p>
 <p>Com o valor total dos dados retornados pelo banco de dados, gera 1 botão que agrupa dados de 100 em 100 ocorrências.</p>
 Script que realiza a iteração está no arquivo `public/index.html`  .
@@ -73,11 +73,12 @@ Endpoint para exibir informações de exames agrupadas por token.
 
 Principais funções da página estão na navbar:
 
-![e239f1987aee0ed7fb0148a018f6b6ac.png](:/d4d3d5d602da4d97b3035d59331af77f)
+image.png
 
 #### Botão "Exibe todo DB"
 Por meio dos endpoints `GET /tests/count` e `GET /tests_list/limit/*/offset/` exibe as 100 primeiras ocorrências e uma lista de botões para a exibição do restante das entradas.
-![a7974d7af03f99c100e55c4cb31cfd00.png](:/170f22ce74a4482b848c748a39e0056d)
+
+image.png
 
 #### Buscar token exame
 Aproveitando o endpoint `GET /tests/token` exibe de forma amigável os resultados dos exames de determinado token.
