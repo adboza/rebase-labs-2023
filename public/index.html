@@ -16,11 +16,10 @@
     </ul>
     <ul class="right-links">
       <li><form id="searchToken">
-        <input type="text" id="token" name="token" placeholder="Buscar token exame">
-        <button type="submit" id="get-token" value="Submit">Buscar</button>
-      </form>
+          <input type="text" id="token" name="token" placeholder="Buscar token exame">
+          <button type="submit" id="get-token" value="Submit">Buscar</button>
+        </form>
       </li>
-
       <li><button id="get-db">Exibe todo DB</button></li>
     </ul>
   </nav>
@@ -72,6 +71,13 @@
     </div>
   </div>
 
+  <div class="b3content">
+    <form id="importCsv" enctype="multipart/form-data" method="post">
+      <label>Importar resultados .csv<input type="file" id="importSelection" name="results" required></label>
+      <button type="submit" id="getImport" value="Send File">Enviar arquivo</button>
+    </form>
+  </div>
+
   <div class="footer">
     <p>Por Adriana Boza | Imagens: StorySet</p>
   </div>
@@ -83,6 +89,7 @@
           getDB(100, 0)}
         );
     document.getElementById("searchToken").addEventListener('submit', searchToken)
+    document.getElementById("importCsv").addEventListener('submit', importCsv)
 
     function setNextButtons(){
       var buttons_area = document.getElementById('buttons-area');
@@ -196,6 +203,19 @@
       });
       fullTokenDiv.style.visibility = 'visible';
     }
+
+    function importCsv(e){
+      e.preventDefault();
+      const fileImput = document.querySelector(`input[results="pwd"]`);
+      const formData = new FormData();
+      formData.append('file', fileImput.files[0])
+
+      const options = {
+        method: 'POST',
+        body: formData
+      };
+      fetch('http://localhost:3000/import', options);
+      }
 
   </script>
 </body>
